@@ -132,11 +132,6 @@ function formatOutput(output) {
 }
 
 function App() {
-const myStyle = {
-  color: "green",
-  BackgroundColor: "green",
-};
-
   const [{ presentOutput, previousOutput, operation }, dispatch] = useReducer(
     reducer,
     {}
