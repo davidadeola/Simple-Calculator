@@ -131,6 +131,7 @@ function formatOutput(output) {
   return `${INTEGER_FORMATTER.format(integer)}.${decimal}`
 }
 
+function App() {
   const [{ presentOutput, previousOutput, operation }, dispatch] = useReducer(
     reducer,
     {}
