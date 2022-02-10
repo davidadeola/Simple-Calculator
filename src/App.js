@@ -131,12 +131,6 @@ function formatOutput(output) {
   return `${INTEGER_FORMATTER.format(integer)}.${decimal}`
 }
 
-function App() {
-const myStyle = {
-  color: "green",
-  BackgroundColor: "green",
-};
-
   const [{ presentOutput, previousOutput, operation }, dispatch] = useReducer(
     reducer,
     {}
