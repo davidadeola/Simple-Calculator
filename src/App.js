@@ -1,15 +1,15 @@
-import { useReducer } from 'react';
-import DigitButton from './DigitButton';
-import OperationButton from './OperationButton';
-import './styles.css';
+import { useReducer } from "react";
+import DigitButton from "./DigitButton";
+import OperationButton from "./OperationButton";
+import "./styles.css";
 
 export const ACTIONS = {
-  ADD_DIGIT: 'add__digit',
-  CHOOSE_OPERATION: 'choose__operation',
-  CLEAR: 'clear',
-  DELETE_DIGIT: 'delete__digit',
-  EVALUATE: 'evaluate',
-}
+  ADD_DIGIT: "add__digit",
+  CHOOSE_OPERATION: "choose__operation",
+  CLEAR: "clear",
+  DELETE_DIGIT: "delete__digit",
+  EVALUATE: "evaluate",
+};
 
 function reducer(state, { type, payload }) {
   switch (type) {
@@ -19,14 +19,13 @@ function reducer(state, { type, payload }) {
           ...state,
           presentOutput: payload.digit,
           overwrite: false,
-        }
+        };
       }
       if (payload.digit === "0" && state.presentOutput === "0") {
         return state;
       }
-      if (payload.digit === "." && state.presentOutput.includes(".")) 
+      if (payload.digit === "." && state.presentOutput.includes("."))
         return state;
-      
 
       return {
         ...state,
@@ -66,18 +65,18 @@ function reducer(state, { type, payload }) {
         return {
           ...state,
           overwrite: false,
-          presentOutput: null
-        }
+          presentOutput: null,
+        };
       }
-      if (state.presentOutput == null) return state
+      if (state.presentOutput == null) return state;
       if (state.presentOutput.length === 1) {
-        return { ...state, presentOutput: null }
+        return { ...state, presentOutput: null };
       }
 
       return {
         ...state,
-        presentOutput: state.presentOutput.slice(0, -1)
-      }
+        presentOutput: state.presentOutput.slice(0, -1),
+      };
     case ACTIONS.EVALUATE:
       if (
         state.operation == null ||
@@ -93,7 +92,7 @@ function reducer(state, { type, payload }) {
         previousOutput: null,
         operation: null,
         presentOutput: evaluate(state),
-      }
+      };
   }
 }
 
@@ -117,18 +116,18 @@ function evaluate({ presentOutput, previousOutput, operation }) {
       break;
   }
 
-  return computation.toString()
+  return computation.toString();
 }
 
-const INTEGER_FORMATTER = new Intl.NumberFormat('en-us', {
+const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", {
   maximumFractionDigits: 0,
-})
+});
 
 function formatOutput(output) {
-  if (output == null) return
-  const [integer, decimal] = output.split('.')
-  if (decimal == null) return INTEGER_FORMATTER.format(integer)
-  return `${INTEGER_FORMATTER.format(integer)}.${decimal}`
+  if (output == null) return;
+  const [integer, decimal] = output.split(".");
+  if (decimal == null) return INTEGER_FORMATTER.format(integer);
+  return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
 }
 
 function App() {
@@ -151,7 +150,9 @@ function App() {
       >
         AC
       </button>
-      <button onClick={() => dispatch({ type: ACTIONS.DELETE_DIGIT })}>DEL</button>
+      <button onClick={() => dispatch({ type: ACTIONS.DELETE_DIGIT })}>
+        DEL
+      </button>
       <OperationButton operation="÷" dispatch={dispatch} />
       <DigitButton digit="1" dispatch={dispatch} />
       <DigitButton digit="2" dispatch={dispatch} />
@@ -164,7 +165,7 @@ function App() {
       <DigitButton digit="7" dispatch={dispatch} />
       <DigitButton digit="8" dispatch={dispatch} />
       <DigitButton digit="9" dispatch={dispatch} />
-      <OperationButton  operation="-" dispatch={dispatch} />
+      <OperationButton operation="-" dispatch={dispatch} />
       <DigitButton digit="." dispatch={dispatch} />
       <DigitButton digit="0" dispatch={dispatch} />
       <button
